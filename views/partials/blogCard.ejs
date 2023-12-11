@@ -1,0 +1,13 @@
+<div class="card mt-4" style="width: 18rem; min-height: 28rem">
+  <img
+    src="<%= info.coverImageUrl %>"
+    class="card-img-top"
+    alt="..."
+    height="200"
+  />
+  <div class="card-body">
+    <h5 class="card-title"><%= info.title %></h5>
+    <p class="card-text"><%= info.body.substring(0,100).concat("...") %></p>
+    <a href="<%= `/blogs/${info._id} `%>" class="btn btn-primary">View More</a>
+  </div>
+</div>

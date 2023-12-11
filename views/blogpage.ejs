@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Home</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <div class="container">
+      <div class="mt-4">
+        <img src="<%= blog.coverImageUrl %>" alt="..." height="500" />
+      </div>
+
+      <div class="container mt-4">
+        <h2><%= blog.title %></h2>
+      </div>
+
+      <div class="container mt-4">
+        <pre><%= blog.body %></pre>
+      </div>
+    </div>
+
+    <div class="container mt-5">
+      <div class="comments">
+        <h4>Comments(<%= locals.comments.length %>)</h4>
+        <% if (locals.user) { %>
+        <form method="post" action="/blogs/<%= blog._id %>/comment">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="mb-3">
+                <input
+                  type="text"
+                  name="content"
+                  class="form-control"
+                  id="content"
+                  placeholder="Add a comment..."
+                />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+          </div>
+        </form>
+        <% } %>
+      </div>
+
+      <div class="commentsList">
+        <% if (locals.comments) { %>
+        <div class="container">
+          <% comments.forEach((comment) => { %>
+          <div class="row">
+            <div class="col col-sm-1" style="width: 4rem">
+              <img
+                class="rounded-circle"
+                src="/images/profile.jpg"
+                alt="img"
+                width="50px"
+              />
+            </div>
+            <div class="col">
+              <h6 style="margin: 0"><%= comment.createdBy.fullName %></h6>
+              <pre><%= comment.content %></pre>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+
+        <% } %>
+      </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+  </body>
+</html>
